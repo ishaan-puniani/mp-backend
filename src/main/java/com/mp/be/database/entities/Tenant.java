@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection ="tenants")
+@Document(collection = "mp_tenants")
 public class Tenant extends BaseEntity {
     private String name;
     private String url;

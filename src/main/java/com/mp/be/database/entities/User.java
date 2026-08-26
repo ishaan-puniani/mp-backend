@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection ="users")
+@Document(collection = "mp_users")
 public class User implements UserDetails {
 
     @Id

@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection ="settings")
+@Document(collection = "mp_settings")
 public class Setting extends BaseEntity {
     
   public String theme;

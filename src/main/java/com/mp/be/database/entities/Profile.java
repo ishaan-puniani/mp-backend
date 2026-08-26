@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection ="profiles")
+@Document(collection = "mp_profiles")
 public class Profile extends BaseEntity{
 
     private String tenantId;

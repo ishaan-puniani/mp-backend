@@ -1,56 +1,60 @@
-/// File is generated from https://studio.fabbuilder.com - 
 package com.mp.be.database.entities;
 
-import com.mp.be.database.enumerator.Categories;
-import com.mp.be.database.enumerator.Status;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mp.be.database.enumerator.ItemStatus;
 import lombok.*;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Data
-@Document(collection ="products")
+@Document(collection = "mp_products")
+@CompoundIndexes({
+        @CompoundIndex(name = "product_tenant_code_idx", def = "{'tenant': 1, 'code': 1}", unique = true)
+})
 public class Product extends BaseEntity {
-    
-  public String name;
-  public double pricing;
 
-  public Integer availableStock;
+    public String name;
+    public String code;
+    public String partCode;
+    public String sku;
+    public String description;
+    public String category;
+    public String brand;
+    public String barcode;
+    public String hsnCode;
+    public Double gstRate;
 
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  public Date availableFrom;
+    public String baseUnit;
+    public double pricing;
+    public Double mrp;
+    public Double costPrice;
 
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  public LocalDateTime availableUpto;
+    public Double weight;
+    public String weightUnit;
+    public Integer shelfLifeDays;
+    public String storageTemperature;
 
-  private Boolean isActive;
+    public Double minStockLevel;
+    public Double maxStockLevel;
 
-  private Status status;
+    private ItemStatus status = ItemStatus.ACTIVE;
 
-  private List<Categories> categories;
+    private String processConfigCode;
 
-  @Field(targetType = FieldType.OBJECT_ID)
-  private String addBy;
+    @Field(targetType = FieldType.OBJECT_ID)
+    private String addBy;
 
-  private List<File> image;
+    private Map<String, Object> specifications;
 
-  private List<File> uploadedFile;
-
-  @Field(targetType = FieldType.OBJECT_ID)
-  private List<String> approvers;
-
-
+    private List<File> image;
+    private List<File> uploadedFile;
 }

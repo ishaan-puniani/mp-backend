@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection ="tenantUser")
+@Document(collection = "mp_tenantUser")
 public class TenantUser {
 
         @Id

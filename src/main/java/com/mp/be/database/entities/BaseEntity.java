@@ -1,16 +1,16 @@
-/// File is generated from https://studio.fabbuilder.com - 
 package com.mp.be.database.entities;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
-import jakarta.persistence.MappedSuperclass;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
+
+import java.util.Date;
 
 @MappedSuperclass
 @Document
@@ -18,23 +18,30 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 @Getter
 public class BaseEntity {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public String id;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Field(targetType = FieldType.OBJECT_ID)
     public String createdBy;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Field(targetType = FieldType.OBJECT_ID)
     public String updatedBy;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Field(targetType = FieldType.OBJECT_ID)
     public String tenant;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreatedDate
     private Date createdAt;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @LastModifiedDate
     private Date updatedAt;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public String importHash;
 
     @Override

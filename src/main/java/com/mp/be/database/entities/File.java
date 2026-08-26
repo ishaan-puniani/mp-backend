@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @Data
-@Document(collection = "file")
+@Document(collection = "mp_file")
 public class File extends BaseEntity{
 
     private String name;

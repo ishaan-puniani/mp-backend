@@ -16,7 +16,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection ="auditlogs")
+@Document(collection = "mp_auditlogs")
 public class AuditLog extends BaseEntity {
     public String entityName;
     public String entityId;
