@@ -46,10 +46,10 @@ brevo:
 
 springdoc:
   api-docs:
-    path: /v3/api-docs
+    path: /api/v3/api-docs
   swagger-ui:
-    path: /swagger-ui.html
-    url: ${SWAGGER_UI_API_DOCS_URL:/v3/api-docs}
+    path: /api/swagger-ui.html
+    url: ${SWAGGER_UI_API_DOCS_URL:/api/v3/api-docs}
     operations-sorter: alpha
     tags-sorter: alpha
     try-it-out-enabled: true
