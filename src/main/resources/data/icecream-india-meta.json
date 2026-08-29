@@ -1,0 +1,177 @@
+{
+  "nodes": {
+    "mixing": {
+      "processLabour": [
+        {
+          "id": "mix-op",
+          "title": "Batch Mix Operator",
+          "monthlyWage": 22000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 9000.0,
+          "description": "Loads sugar syrup, stabilizer; monitors blend viscosity."
+        },
+        {
+          "id": "mix-helper",
+          "title": "Mixing Helper",
+          "monthlyWage": 14000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 9000.0,
+          "description": "Assists with raw material handling and CIP cleaning."
+        }
+      ],
+      "processCosts": [
+        { "id": "mix-pwr", "label": "High-shear mixing power", "ratePerUnit": 1.10, "currency": "INR", "unit": "L" }
+      ]
+    },
+    "pasteurization": {
+      "processLabour": [
+        {
+          "id": "past-op",
+          "title": "Pasteurizer Operator",
+          "monthlyWage": 20000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 12000.0,
+          "description": "Monitors HTST pasteurization cycle and CIP."
+        }
+      ],
+      "processCosts": [
+        { "id": "past-steam", "label": "Steam consumption", "ratePerUnit": 0.85, "currency": "INR", "unit": "L" }
+      ]
+    },
+    "homogenization": {
+      "processLabour": [
+        {
+          "id": "homog-op",
+          "title": "Homogenizer Operator",
+          "monthlyWage": 19000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 12000.0,
+          "description": "Controls two-stage homogenization pressure."
+        }
+      ],
+      "processCosts": [
+        { "id": "homog-pwr", "label": "Homogenizer power draw", "ratePerUnit": 0.95, "currency": "INR", "unit": "L" }
+      ]
+    },
+    "ageing": {
+      "processLabour": [
+        {
+          "id": "age-op",
+          "title": "Ageing Tank Attendant",
+          "monthlyWage": 15000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 15000.0,
+          "description": "Monitors 4C ageing hold and tank hygiene."
+        }
+      ],
+      "processCosts": [
+        { "id": "age-ref", "label": "Refrigeration hold cost", "ratePerUnit": 0.40, "currency": "INR", "unit": "L" }
+      ]
+    },
+    "flavouring": {
+      "processLabour": [
+        {
+          "id": "flav-op",
+          "title": "Flavour Dosing Operator",
+          "monthlyWage": 17000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 12000.0,
+          "description": "Doses flavour and colour per batch recipe."
+        }
+      ],
+      "processCosts": [
+        { "id": "flav-cost", "label": "Flavour & colour dosing cost", "ratePerUnit": 3.20, "currency": "INR", "unit": "L" }
+      ]
+    },
+    "freezing": {
+      "processLabour": [
+        {
+          "id": "freeze-op",
+          "title": "Continuous Freezer Operator",
+          "monthlyWage": 21000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 13000.0,
+          "description": "Controls draw temperature and overrun."
+        }
+      ],
+      "processCosts": [
+        { "id": "freeze-ref", "label": "Ammonia refrigeration cost", "ratePerUnit": 1.60, "currency": "INR", "unit": "L" }
+      ]
+    },
+    "hardening": {
+      "processLabour": [
+        {
+          "id": "harden-op",
+          "title": "Blast Tunnel Operator",
+          "monthlyWage": 18000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 20000.0,
+          "description": "Monitors -30C blast hardening tunnel."
+        }
+      ],
+      "processCosts": [
+        { "id": "harden-pwr", "label": "Blast freezing power cost", "ratePerUnit": 2.10, "currency": "INR", "unit": "kg" }
+      ]
+    },
+    "packaging": {
+      "processLabour": [
+        {
+          "id": "pack-op",
+          "title": "Filling Line Operator",
+          "monthlyWage": 16000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 25000.0,
+          "description": "Operates automatic tub filling & lidding line."
+        },
+        {
+          "id": "pack-helper",
+          "title": "Packaging Line Helper",
+          "monthlyWage": 12000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 25000.0,
+          "description": "Feeds tubs/lids and stacks filled cartons."
+        }
+      ],
+      "consumables": [
+        { "id": "tub-500", "label": "500ml IML carton tub", "spec": "Food-grade PE lined", "consumptionRate": 1.0, "unit": "pcs", "basis": "carton" },
+        { "id": "lid-500", "label": "500ml tub lid", "spec": "Food-grade PP", "consumptionRate": 1.0, "unit": "pcs", "basis": "carton" }
+      ],
+      "processCosts": [
+        { "id": "pack-pwr", "label": "Filling line power cost", "ratePerUnit": 0.75, "currency": "INR", "unit": "pcs" }
+      ]
+    },
+    "cartoning": {
+      "processLabour": [
+        {
+          "id": "carton-op",
+          "title": "Cartoning Operator",
+          "monthlyWage": 13000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 25000.0,
+          "description": "Packs tubs into secondary shipper cartons."
+        }
+      ],
+      "consumables": [
+        { "id": "shipper-carton-12", "label": "12-tub shipper carton", "spec": "3-ply corrugated", "consumptionRate": 0.0833, "unit": "carton", "basis": "carton" }
+      ],
+      "processCosts": [
+        { "id": "carton-pack", "label": "Secondary packaging cost", "ratePerUnit": 0.30, "currency": "INR", "unit": "pcs" }
+      ]
+    },
+    "qc-lab": {
+      "processLabour": [
+        {
+          "id": "qc-tech",
+          "title": "Quality Control Technician",
+          "monthlyWage": 19000.0,
+          "currency": "INR",
+          "monthlyCapacityUnits": 25000.0,
+          "description": "Performs fat/SNF/microbial checks on finished batches."
+        }
+      ],
+      "processCosts": [
+        { "id": "qc-lab-cost", "label": "Lab testing consumables", "ratePerUnit": 0.20, "currency": "INR", "unit": "carton" }
+      ]
+    }
+  }
+}

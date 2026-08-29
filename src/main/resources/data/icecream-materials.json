@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Milk",
+    "code": "milk",
+    "type": "raw-material",
+    "baseUnit": "L",
+    "density": 1.03,
+    "standardCost": 48.0,
+    "description": "Standardized cow milk, 3.5% fat, used as the primary base for ice cream mix.",
+    "status": "active"
+  },
+  {
+    "name": "Cream",
+    "code": "cream",
+    "type": "raw-material",
+    "baseUnit": "L",
+    "density": 0.99,
+    "standardCost": 320.0,
+    "description": "Dairy cream, 40% fat, used to raise fat content of the mix.",
+    "status": "active"
+  },
+  {
+    "name": "Sugar",
+    "code": "sugar",
+    "type": "raw-material",
+    "baseUnit": "kg",
+    "density": 1.59,
+    "standardCost": 42.0,
+    "description": "Refined cane sugar used for sweetening the mix.",
+    "status": "active"
+  },
+  {
+    "name": "Stabilizer & Emulsifier Blend",
+    "code": "stabilizer",
+    "type": "chemical",
+    "baseUnit": "kg",
+    "density": 0.55,
+    "standardCost": 380.0,
+    "description": "Guar gum / mono-diglyceride blend used to control ice crystal growth and improve texture.",
+    "status": "active"
+  },
+  {
+    "name": "Flavour & Colour Concentrate",
+    "code": "flavour",
+    "type": "raw-material",
+    "baseUnit": "kg",
+    "density": 1.02,
+    "standardCost": 950.0,
+    "description": "Food-grade flavour and colour concentrate dosed at the flavouring station.",
+    "status": "active"
+  }
+]

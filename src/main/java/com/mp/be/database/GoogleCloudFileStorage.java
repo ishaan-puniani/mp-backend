@@ -7,11 +7,10 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.google.common.io.BaseEncoding;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
@@ -26,18 +25,14 @@ public class GoogleCloudFileStorage {
     @Value("${google.cloud.storage.bucket}")
     private String bucketName;
 
-    @Value("${google.cloud.credentials.path}")
-    private Resource credentialsPath;
-
     private Storage storage;
     private ServiceAccountCredentials serviceAccountCredentials;
 
     public GoogleCloudFileStorage(@Value("${google.cloud.storage.bucket}") String bucketName,
-                                  @Value("${google.cloud.credentials.path}") Resource credentialsPath) throws IOException {
+                                  @Value("${google.cloud.credentials.json}") String credentialsJson) throws IOException {
         this.bucketName = bucketName;
-        this.credentialsPath = credentialsPath;
 
-        try (InputStream credentialsStream = credentialsPath.getInputStream()) {
+        try (ByteArrayInputStream credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes(StandardCharsets.UTF_8))) {
             GoogleCredentials googleCredentials = GoogleCredentials.fromStream(credentialsStream);
             if (googleCredentials instanceof ServiceAccountCredentials) {
                 this.serviceAccountCredentials = (ServiceAccountCredentials) googleCredentials;
