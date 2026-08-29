@@ -1,5 +1,6 @@
 server:
   port: ${PORT:8080}
+  forward-headers-strategy: framework
   tomcat:
     relaxed-query-chars: '[,]'
 
@@ -48,6 +49,7 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+    url: ${SWAGGER_UI_API_DOCS_URL:/v3/api-docs}
     operations-sorter: alpha
     tags-sorter: alpha
     try-it-out-enabled: true
