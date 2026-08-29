@@ -12,7 +12,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Packaging hierarchy & volumetric-to-discrete conversion profile for the manufacturing plant")
+@Schema(name = "Process_MeasurementProfile", description = "Packaging hierarchy & volumetric-to-discrete conversion profile for the manufacturing plant")
 public class MeasurementProfile {
 
     @Schema(description = "Unique identifier of the measurement profile", example = "icecream-std-profile")
@@ -27,10 +27,6 @@ public class MeasurementProfile {
     @Schema(description = "Secondary discrete packaging unit", example = "carton")
     private String secondaryUnit;
 
-    @Schema(description = "Liquid density in kg/L for volumetric-to-mass conversions", example = "1.03")
-    private Double densityKgPerL;
-
-    @Schema(description = "Dynamic conversion ratios (e.g. litersPerCarton, cartonsPerBox, boxesPerPallet)",
-            example = "{\"litersPerCarton\": 0.5, \"cartonsPerBox\": 12, \"boxesPerPallet\": 40}")
+    @Schema(description = "Dynamic conversion ratios (e.g. litersPerCarton, cartonsPerBox, boxesPerPallet)", example = "{\"litersPerCarton\": 0.5, \"cartonsPerBox\": 12, \"boxesPerPallet\": 40}")
     private Map<String, Object> conversionProperties;
 }

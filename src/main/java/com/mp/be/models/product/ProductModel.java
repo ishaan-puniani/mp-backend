@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Setter
 @Getter
-@Schema(description = "Commercial Finished Product / SKU Model")
+@Schema(name = "Product_Model", description = "Commercial Finished Product / SKU Model")
 public class ProductModel {
 
     @Schema(description = "Primary unique identifier", example = "64b0f9c2a1e45c001f3b8901")

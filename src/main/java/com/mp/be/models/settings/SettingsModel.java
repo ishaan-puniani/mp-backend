@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Schema(name = "Settings_Model", description = "Tenant Branding and UI Settings Model")
 public class SettingsModel {
     public String id;
     public String theme;

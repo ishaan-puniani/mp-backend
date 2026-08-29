@@ -6,8 +6,11 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Setter
 @Getter
+@Schema(name = "Tenant_Model", description = "Tenant Organization Model")
 public class TenantModel {
     public String id;
     public String name;

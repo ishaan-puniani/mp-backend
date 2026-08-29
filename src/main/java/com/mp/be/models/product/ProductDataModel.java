@@ -5,8 +5,9 @@ import com.mp.be.database.entities.Product;
 import java.util.Map;
 import java.util.Optional;
 
-import static java.util.Optional.ofNullable;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(name = "Product_DataModel", description = "Product Single Data Wrapper")
 public class ProductDataModel {
 
     public Product data;

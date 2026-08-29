@@ -16,7 +16,7 @@ import java.util.Map;
 @Setter
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Manufacturing Process Workflow Configuration Model")
+@Schema(name = "Process_ConfigurationModel", description = "Manufacturing Process Workflow Configuration Model")
 public class ProcessConfigurationModel {
 
     @Schema(description = "Primary unique identifier", example = "64b0f9c2a1e45c001f3b8901")

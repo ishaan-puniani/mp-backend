@@ -8,10 +8,13 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Schema(name = "Process_NodeParameters", description = "Station Operating Parameters, Feed, Capacity, and Recipes")
 public class ProcessNodeParameters {
 
     private Object inputMaterial;

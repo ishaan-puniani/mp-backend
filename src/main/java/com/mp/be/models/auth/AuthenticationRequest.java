@@ -2,6 +2,9 @@
 package com.mp.be.models.auth;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name = "Auth_LoginRequest", description = "Authentication Login Credentials Request Model")
 public class AuthenticationRequest {
     public String email;
     public String password;

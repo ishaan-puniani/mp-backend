@@ -9,8 +9,11 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Setter
 @Getter
+@Schema(name = "Material_Model", description = "Material Master Catalog Item Model")
 public class MaterialMasterModel {
     private String id;
     private String name;

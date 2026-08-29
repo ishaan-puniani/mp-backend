@@ -7,8 +7,11 @@ import lombok.Setter;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Setter
 @Getter
+@Schema(name = "User_Model", description = "System User Account Model")
 public class UserModel {
     public String id;
     public String email;

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Packaging or CIP consumable item utilized at a process station")
+@Schema(name = "Process_ConsumableRequirement", description = "Packaging or CIP consumable item utilized at a process station")
 public class ProcessConsumableRequirement {
 
     @Schema(description = "Consumable identifier", example = "tub-500")

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Ingredient formulation item in a batch mixing recipe")
+@Schema(name = "Process_MixRecipeItem", description = "Ingredient formulation item in a batch mixing recipe")
 public class MixRecipeItem {
 
     @Schema(description = "Node ID from which this raw material feeds in", example = "milk-godown")

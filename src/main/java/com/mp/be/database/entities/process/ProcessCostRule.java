@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Utility, power, or operational running cost rate associated with a process node")
+@Schema(name = "Process_CostRule", description = "Utility, power, or operational running cost rate associated with a process node")
 public class ProcessCostRule {
 
     @Schema(description = "Cost identifier", example = "mix-pwr")
@@ -22,6 +22,7 @@ public class ProcessCostRule {
     private String label;
 
     @Schema(description = "Cost rate per unit of throughput", example = "1.10")
+    @com.fasterxml.jackson.annotation.JsonAlias({"rate", "inrPerUnit"})
     private Double ratePerUnit;
 
     @Schema(description = "Currency ISO code for the cost rule", example = "INR")

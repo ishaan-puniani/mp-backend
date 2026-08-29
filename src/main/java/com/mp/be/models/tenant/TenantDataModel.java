@@ -6,8 +6,9 @@ import com.mp.be.database.entities.Tenant;
 import java.util.Map;
 import java.util.Optional;
 
-import static java.util.Optional.ofNullable;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(name = "Tenant_DataModel", description = "Tenant Organization Single Data Wrapper")
 public class TenantDataModel {
 
     public Tenant data;

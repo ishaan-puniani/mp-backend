@@ -26,8 +26,6 @@ public class MachineMaster extends BaseEntity {
     private String machineType;
     private Double capacity;
     private String capacityUnit;
-    private Double powerRating;
-    private String location;
     private ItemStatus status = ItemStatus.ACTIVE;
     private Map<String, Object> parameters;
 

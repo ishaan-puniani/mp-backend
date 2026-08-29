@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Workforce and operator requirement specifications for a station")
+@Schema(name = "Process_LabourRequirement", description = "Workforce and operator requirement specifications for a station")
 public class ProcessLabourRequirement {
 
     @Schema(description = "Labour role identifier", example = "mix-op")

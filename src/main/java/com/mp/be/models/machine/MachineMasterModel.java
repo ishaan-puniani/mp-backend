@@ -8,8 +8,11 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Setter
 @Getter
+@Schema(name = "Machine_Model", description = "Machine & Workcenter Master Model")
 public class MachineMasterModel {
     private String id;
     private String name;
@@ -18,8 +21,6 @@ public class MachineMasterModel {
     private String machineType;
     private Double capacity;
     private String capacityUnit;
-    private Double powerRating;
-    private String location;
     private ItemStatus status;
     private Map<String, Object> parameters;
 

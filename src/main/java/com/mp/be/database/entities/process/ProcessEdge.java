@@ -13,7 +13,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Material flow connector / Directed edge connecting two manufacturing stations")
+@Schema(name = "Process_Edge", description = "Material flow connector / Directed edge connecting two manufacturing stations")
 public class ProcessEdge {
 
     @Schema(description = "Edge connection identifier", example = "e-milk-mixing")

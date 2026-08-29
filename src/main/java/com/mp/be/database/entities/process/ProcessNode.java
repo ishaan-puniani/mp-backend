@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Workstation / Machine station or godown in the manufacturing plant DAG")
+@Schema(name = "Process_Node", description = "Workstation / Machine station or godown in the manufacturing plant DAG")
 public class ProcessNode {
 
     @Schema(description = "Node station unique identifier", example = "mixing")

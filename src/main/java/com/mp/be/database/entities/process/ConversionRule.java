@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(description = "Mathematical conversion rule governing throughput transformation across a directed edge")
+@Schema(name = "Process_ConversionRule", description = "Mathematical conversion rule governing throughput transformation across a directed edge")
 public class ConversionRule {
 
     @Schema(description = "Conversion mechanism (IDENTITY, DIVIDE_BY_PROPERTY, MULTIPLY_BY_PROPERTY, DENSITY, AIR_OVERRUN, CUSTOM_FORMULA)", example = "DIVIDE_BY_PROPERTY")

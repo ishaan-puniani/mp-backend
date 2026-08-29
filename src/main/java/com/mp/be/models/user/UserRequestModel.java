@@ -2,11 +2,13 @@
 package com.mp.be.models.user;
 
 import java.util.Map;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Schema(name = "User_RequestModel", description = "User Query and Filter Request Model")
 public class UserRequestModel {
 
     public Map<String, Object> filter;

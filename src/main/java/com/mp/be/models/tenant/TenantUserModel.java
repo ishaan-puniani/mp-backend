@@ -6,8 +6,11 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Setter
 @Getter
+@Schema(name = "Tenant_UserModel", description = "Tenant User Membership and Roles Model")
 public class TenantUserModel {
     public String id;
     public List<String> roles;
