@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class UserModel {
     public String id;
     public String email;
-    public String password;
     public Boolean emailVerified;
     public List<TenantUserModel> tenants;
     public List<String> roles;

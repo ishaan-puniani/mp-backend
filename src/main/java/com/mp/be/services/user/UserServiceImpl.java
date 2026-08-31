@@ -11,6 +11,7 @@ import com.mp.be.models.settings.SettingsModel;
 import com.mp.be.models.tenant.TenantModel;
 import com.mp.be.models.tenant.TenantUserModel;
 import com.mp.be.models.user.UserModel;
+import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.BrevoEmailService;
 import com.mp.be.services.ServiceOptions;
 import com.mp.be.models.user.UserRequestModel;
@@ -132,10 +133,29 @@ public class UserServiceImpl implements UserService {
     public UserModel find(ServiceOptions serviceOptions, String id) {
         User record = repository.findById(id).orElse(null);
         UserModel userModel = mapUserForTenant(record, serviceOptions.getCurrentTenant());
-        
-        // Fetch full tenant information
-        if (record.getTenants() != null) {
-            List<TenantUserModel> tenantUserModels = new ArrayList<>();
+        if (userModel != null) {
+            userModel.setTenants(fetchTenantUserModels(record));
+        }
+        return userModel;
+    }
+
+    @Override
+    public UserMeModel findMe(ServiceOptions serviceOptions, String id) {
+        User record = repository.findById(id).orElse(null);
+        if (record == null) {
+            return null;
+        }
+        UserMeModel userModel = new UserMeModel();
+        userModel.setId(record.getId());
+        userModel.setEmail(record.getEmail());
+        userModel.setEmailVerified(record.getEmailVerified());
+        userModel.setTenants(fetchTenantUserModels(record));
+        return userModel;
+    }
+
+    private List<TenantUserModel> fetchTenantUserModels(User record) {
+        List<TenantUserModel> tenantUserModels = new ArrayList<>();
+        if (record != null && record.getTenants() != null) {
             for (TenantUser tenantUser : record.getTenants()) {
                 Tenant tenant = tenantRepository.findById(tenantUser.getTenant()).orElse(null);
                 if (tenant != null) {
@@ -164,10 +184,8 @@ public class UserServiceImpl implements UserService {
                     tenantUserModels.add(tenantUserModel);
                 }
             }
-            userModel.setTenants(tenantUserModels);
         }
-        
-        return userModel;
+        return tenantUserModels;
     }
 
     public UserModel findByEmail(ServiceOptions serviceOptions, String email) {
@@ -261,9 +279,11 @@ public class UserServiceImpl implements UserService {
      * Maps the user data to show only the current tenant related info
      */
     public static UserModel mapUserForTenant(User user, Tenant tenant) {
-
+        if (user == null) {
+            return null;
+        }
         TenantUser tenantUser = null;
-        if(tenant!=null) {
+        if(tenant!=null && user.getTenants() != null) {
             for (TenantUser tu : user.getTenants()) {
                 if (tu != null && tu.getTenant() != null && String.valueOf(tu.getTenant()).equals(String.valueOf(tenant.id))) {
                     tenantUser = tu;

@@ -3,6 +3,7 @@ package com.mp.be.services.user;
 
 import com.mp.be.database.entities.User;
 import com.mp.be.models.user.UserModel;
+import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.ServiceOptions;
 import com.mp.be.models.user.UserRequestModel;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ public interface UserService {
                                       Optional <String> orderBy);
 
     public UserModel find(ServiceOptions serviceOptions, String id);
+
+    public UserMeModel findMe(ServiceOptions serviceOptions, String id);
 
     public UserModel findByEmail(ServiceOptions serviceOptions, String email);
 

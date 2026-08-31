@@ -7,6 +7,7 @@ import com.mp.be.models.auth.PasswordModel;
 import com.mp.be.models.auth.ProfileDataModel;
 import com.mp.be.models.auth.ResetPasswordModel;
 import com.mp.be.models.user.UserModel;
+import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.ServiceOptions;
 import com.mp.be.services.auth.AuthenticationService;
 import com.mp.be.services.user.UserService;
@@ -34,10 +35,10 @@ public class AuthenticationController {
 
     @Operation(summary = "Get current authenticated user profile")
     @GetMapping("/me")
-    public ResponseEntity<UserModel> me(HttpServletRequest request) {
+    public ResponseEntity<UserMeModel> me(HttpServletRequest request) {
         ServiceOptions serviceOptions = new ServiceOptions(request);
         User currentUser = (User) request.getAttribute("currentUser");
-        UserModel userModel = userService.find(serviceOptions, currentUser.getId());
+        UserMeModel userModel = userService.findMe(serviceOptions, currentUser.getId());
         return ResponseEntity.ok(userModel);
     }
 

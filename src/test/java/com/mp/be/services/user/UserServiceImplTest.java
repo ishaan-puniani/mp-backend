@@ -10,6 +10,7 @@ import com.mp.be.models.settings.SettingsModel;
 import com.mp.be.models.tenant.TenantModel;
 import com.mp.be.models.tenant.TenantUserModel;
 import com.mp.be.models.user.UserModel;
+import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.BrevoEmailService;
 import com.mp.be.services.ServiceOptions;
 import com.mp.be.services.user.UserServiceImpl;
@@ -267,6 +268,24 @@ public class UserServiceImplTest {
         UserModel result = userServiceImpl.find(mock(ServiceOptions.class), userId);
 
         assertNotNull(result);
+        assertEquals(0, result.getTenants().size());
+    }
+
+    @Test
+    void testFindMe() {
+        String userId = "userId";
+        User user = new User();
+        user.setId(userId);
+        user.setEmail("user@example.com");
+        user.setEmailVerified(true);
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        UserMeModel result = userServiceImpl.findMe(mock(ServiceOptions.class), userId);
+
+        assertNotNull(result);
+        assertEquals(userId, result.getId());
+        assertEquals("user@example.com", result.getEmail());
+        assertEquals(true, result.getEmailVerified());
         assertEquals(0, result.getTenants().size());
     }
 

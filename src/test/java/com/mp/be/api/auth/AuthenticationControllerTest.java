@@ -8,6 +8,7 @@ import com.mp.be.models.auth.PasswordModel;
 import com.mp.be.models.auth.ProfileDataModel;
 import com.mp.be.models.auth.ResetPasswordModel;
 import com.mp.be.models.user.UserModel;
+import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.auth.AuthenticationService;
 import com.mp.be.services.user.UserService;
 import com.mp.be.services.ServiceOptions;
@@ -77,16 +78,16 @@ public class AuthenticationControllerTest {
         User currentUser = new User();
         currentUser.setId("1");
         when(request.getAttribute("currentUser")).thenReturn(currentUser);
-        UserModel userModel = new UserModel();
+        UserMeModel userModel = new UserMeModel();
 
         // Test success scenario
-        when(userService.find(any(ServiceOptions.class), eq("1"))).thenReturn(userModel);
-        ResponseEntity<UserModel> response = authenticationController.me(request);
+        when(userService.findMe(any(ServiceOptions.class), eq("1"))).thenReturn(userModel);
+        ResponseEntity<UserMeModel> response = authenticationController.me(request);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(userModel, response.getBody());
 
         // Test failure scenario
-        when(userService.find(any(ServiceOptions.class), eq("1"))).thenThrow(new RuntimeException("User not found"));
+        when(userService.findMe(any(ServiceOptions.class), eq("1"))).thenThrow(new RuntimeException("User not found"));
         try {
             response = authenticationController.me(request);
         } catch (RuntimeException e) {
