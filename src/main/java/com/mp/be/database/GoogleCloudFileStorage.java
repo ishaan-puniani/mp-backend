@@ -28,9 +28,13 @@ public class GoogleCloudFileStorage {
     private Storage storage;
     private ServiceAccountCredentials serviceAccountCredentials;
 
-    public GoogleCloudFileStorage(@Value("${google.cloud.storage.bucket}") String bucketName,
-                                  @Value("${google.cloud.credentials.json}") String credentialsJson) throws IOException {
+    public GoogleCloudFileStorage(@Value("${google.cloud.storage.bucket:}") String bucketName,
+                                  @Value("${google.cloud.credentials.json:}") String credentialsJson) throws IOException {
         this.bucketName = bucketName;
+
+        if (credentialsJson == null || credentialsJson.trim().isEmpty()) {
+            return;
+        }
 
         try (ByteArrayInputStream credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes(StandardCharsets.UTF_8))) {
             GoogleCredentials googleCredentials = GoogleCredentials.fromStream(credentialsStream);
@@ -47,6 +51,9 @@ public class GoogleCloudFileStorage {
     }
 
     public Map<String, Object> uploadCredentials(String filename, String storageId) throws IOException, GeneralSecurityException, URISyntaxException {
+        if (serviceAccountCredentials == null) {
+            throw new IllegalStateException("Google Cloud Storage credentials are not configured.");
+        }
         String key = storageId + "/" + filename;
         BlobId blobId = BlobId.of(bucketName, key);
         String acl = "public-read";
