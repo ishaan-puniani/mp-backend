@@ -1,0 +1,369 @@
+{
+  "code": "PROC-ICECREAM-01",
+  "name": "Ice Cream Plant",
+  "description": "End-to-end ice cream manufacturing process: batch mixing, pasteurization, homogenization, ageing, flavouring, continuous freezing, hardening, and tub packaging.",
+  "productCode": "ICECREAM-500ML-TUB",
+  "version": 1,
+  "status": "ACTIVE",
+  "measurementProfile": {
+    "profileId": "icecream-std-profile",
+    "description": "500ml Tub Packaging Profile",
+    "primaryUnit": "L",
+    "secondaryUnit": "carton",
+    "conversionProperties": {
+      "litersPerCarton": 6.0,
+      "cartonsPerBox": 12,
+      "boxesPerPallet": 40
+    }
+  },
+  "metadata": {
+    "region": "India",
+    "seedSource": "icecream-manufacturing.json"
+  },
+  "nodes": [
+    {
+      "id": "milk-godown",
+      "label": "Milk Storage Tank",
+      "subtitle": "GOD-MILK-01",
+      "nodeKind": "godown",
+      "column": 0,
+      "row": 0,
+      "parameters": {
+        "outputMaterial": "milk",
+        "capacity": 5000.0,
+        "stock": 4200.0,
+        "units": { "capacity": "L", "stock": "L" }
+      }
+    },
+    {
+      "id": "cream-godown",
+      "label": "Cream Storage Tank",
+      "subtitle": "GOD-CREAM-01",
+      "nodeKind": "godown",
+      "column": 0,
+      "row": 1,
+      "parameters": {
+        "outputMaterial": "cream",
+        "capacity": 2000.0,
+        "stock": 1500.0,
+        "units": { "capacity": "L", "stock": "L" }
+      }
+    },
+    {
+      "id": "sugar-godown",
+      "label": "Sugar Storage",
+      "subtitle": "GOD-SUGAR-01",
+      "nodeKind": "godown",
+      "column": 0,
+      "row": 2,
+      "parameters": {
+        "outputMaterial": "sugar",
+        "capacity": 3000.0,
+        "stock": 2600.0,
+        "units": { "capacity": "kg", "stock": "kg" }
+      }
+    },
+    {
+      "id": "stabilizer-godown",
+      "label": "Stabilizer & Emulsifier Store",
+      "subtitle": "GOD-STAB-01",
+      "nodeKind": "godown",
+      "column": 0,
+      "row": 3,
+      "parameters": {
+        "outputMaterial": "stabilizer",
+        "capacity": 500.0,
+        "stock": 380.0,
+        "units": { "capacity": "kg", "stock": "kg" }
+      }
+    },
+    {
+      "id": "flavour-godown",
+      "label": "Flavour & Colour Store",
+      "subtitle": "GOD-FLAV-01",
+      "nodeKind": "godown",
+      "column": 4,
+      "row": 3,
+      "parameters": {
+        "outputMaterial": "flavour",
+        "capacity": 300.0,
+        "stock": 210.0,
+        "units": { "capacity": "kg", "stock": "kg" }
+      }
+    },
+    {
+      "id": "mixing",
+      "label": "Mixing",
+      "subtitle": "PROC-MIX-01",
+      "nodeKind": "machine",
+      "column": 1,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-MIX-01",
+      "parameters": {
+        "outputMaterial": "ice-cream-mix",
+        "capacity": 2000.0,
+        "expectedInputFeed": 1800.0,
+        "expectedOutput": 1750.0,
+        "expectedWastage": 50.0,
+        "units": { "capacity": "L", "expectedOutput": "L" },
+        "mixRecipe": [
+          {
+            "sourceNodeId": "milk-godown",
+            "ingredientCode": "milk",
+            "ingredient": "Milk",
+            "ratio": 0.58,
+            "unit": "L",
+            "ratioBasis": "share"
+          },
+          {
+            "sourceNodeId": "cream-godown",
+            "ingredientCode": "cream",
+            "ingredient": "Cream",
+            "ratio": 0.22,
+            "unit": "L",
+            "ratioBasis": "share"
+          },
+          {
+            "sourceNodeId": "sugar-godown",
+            "ingredientCode": "sugar",
+            "ingredient": "Sugar",
+            "ratio": 0.14,
+            "unit": "kg",
+            "ratioBasis": "share"
+          },
+          {
+            "sourceNodeId": "stabilizer-godown",
+            "ingredientCode": "stabilizer",
+            "ingredient": "Stabilizer & Emulsifier Blend",
+            "ratio": 0.06,
+            "unit": "kg",
+            "ratioBasis": "share"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pasteurization",
+      "label": "Pasteurization",
+      "subtitle": "PROC-PAST-01",
+      "nodeKind": "machine",
+      "column": 2,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-PAST-01",
+      "parameters": {
+        "inputMaterial": "ice-cream-mix",
+        "outputMaterial": "pasteurized-mix",
+        "capacity": 1800.0,
+        "expectedInputFeed": 1750.0,
+        "expectedOutput": 1735.0,
+        "expectedWastage": 15.0,
+        "units": { "capacity": "L/hr" }
+      }
+    },
+    {
+      "id": "homogenization",
+      "label": "Homogenization",
+      "subtitle": "PROC-HOMOG-01",
+      "nodeKind": "machine",
+      "column": 3,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-HOMOG-01",
+      "parameters": {
+        "inputMaterial": "pasteurized-mix",
+        "outputMaterial": "homogenized-mix",
+        "capacity": 1800.0,
+        "expectedInputFeed": 1735.0,
+        "expectedOutput": 1725.0,
+        "expectedWastage": 10.0,
+        "units": { "capacity": "L/hr" }
+      }
+    },
+    {
+      "id": "ageing",
+      "label": "Ageing",
+      "subtitle": "PROC-AGE-01",
+      "nodeKind": "machine",
+      "column": 4,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-AGE-01",
+      "parameters": {
+        "inputMaterial": "homogenized-mix",
+        "outputMaterial": "aged-mix",
+        "capacity": 2000.0,
+        "expectedInputFeed": 1725.0,
+        "expectedOutput": 1720.0,
+        "expectedWastage": 5.0,
+        "units": { "capacity": "L" }
+      }
+    },
+    {
+      "id": "flavouring",
+      "label": "Flavouring",
+      "subtitle": "PROC-FLAV-01",
+      "nodeKind": "machine",
+      "column": 5,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-FLAV-01",
+      "parameters": {
+        "inputMaterial": "aged-mix",
+        "outputMaterial": "flavoured-mix",
+        "capacity": 1800.0,
+        "expectedInputFeed": 1720.0,
+        "expectedOutput": 1715.0,
+        "expectedWastage": 5.0,
+        "units": { "capacity": "L/hr" }
+      }
+    },
+    {
+      "id": "freezing",
+      "label": "Continuous Freezing",
+      "subtitle": "PROC-FREEZE-01",
+      "nodeKind": "machine",
+      "column": 6,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-FREEZE-01",
+      "parameters": {
+        "inputMaterial": "flavoured-mix",
+        "outputMaterial": "soft-serve-icecream",
+        "capacity": 1500.0,
+        "expectedInputFeed": 1715.0,
+        "expectedOutput": 2350.0,
+        "expectedWastage": 20.0,
+        "units": { "capacity": "L/hr" }
+      }
+    },
+    {
+      "id": "hardening",
+      "label": "Blast Hardening",
+      "subtitle": "PROC-HARDEN-01",
+      "nodeKind": "machine",
+      "column": 7,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-HARDEN-01",
+      "parameters": {
+        "inputMaterial": "soft-serve-icecream",
+        "outputMaterial": "hardened-icecream",
+        "capacity": 2500.0,
+        "expectedInputFeed": 2350.0,
+        "expectedOutput": 2330.0,
+        "expectedWastage": 20.0,
+        "units": { "capacity": "kg/hr" }
+      }
+    },
+    {
+      "id": "packaging",
+      "label": "Packaging",
+      "subtitle": "PROC-PACK-01",
+      "nodeKind": "machine",
+      "column": 8,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-PACK-01",
+      "parameters": {
+        "inputMaterial": "hardened-icecream",
+        "outputMaterial": "packed-tub-500ml",
+        "capacity": 2500.0,
+        "expectedInputFeed": 2330.0,
+        "expectedOutput": 2300.0,
+        "expectedWastage": 30.0,
+        "units": { "capacity": "pcs/hr" }
+      }
+    },
+    {
+      "id": "cartoning",
+      "label": "Cartoning",
+      "subtitle": "PROC-CARTON-01",
+      "nodeKind": "machine",
+      "column": 9,
+      "row": 1,
+      "status": "running",
+      "machineCode": "MACH-CARTON-01",
+      "parameters": {
+        "inputMaterial": "packed-tub-500ml",
+        "outputMaterial": "cartoned-icecream",
+        "capacity": 2300.0,
+        "expectedInputFeed": 2300.0,
+        "expectedOutput": 2290.0,
+        "expectedWastage": 10.0,
+        "units": { "capacity": "pcs/hr" }
+      }
+    },
+    {
+      "id": "qc-lab",
+      "label": "Quality Control Lab",
+      "subtitle": "PROC-QC-01",
+      "nodeKind": "qc-inspection",
+      "column": 10,
+      "row": 1,
+      "parameters": {
+        "inputMaterial": "cartoned-icecream",
+        "outputMaterial": "qc-approved-icecream",
+        "expectedInput": 2290.0,
+        "expectedDispatch": 2270.0,
+        "expectedWastage": 20.0,
+        "units": { "expectedDispatch": "carton" }
+      }
+    },
+    {
+      "id": "cold-storage",
+      "label": "Finished Goods Cold Store",
+      "subtitle": "GOD-COLD-01",
+      "nodeKind": "distribution-warehouse",
+      "column": 11,
+      "row": 1,
+      "parameters": {
+        "inputMaterial": "qc-approved-icecream",
+        "capacity": 5000.0,
+        "stock": 2270.0,
+        "units": { "capacity": "carton", "stock": "carton" }
+      }
+    },
+    {
+      "id": "wastage-holder",
+      "label": "Process Wastage Collector",
+      "subtitle": "WASTE-01",
+      "nodeKind": "wastage-holder",
+      "column": 5,
+      "row": 4,
+      "parameters": {
+        "inputMaterial": "process-wastage",
+        "stock": 0.0,
+        "units": { "stock": "kg" }
+      }
+    }
+  ],
+  "edges": [
+    { "id": "e-milk-mixing", "source": "milk-godown", "target": "mixing", "materialCode": "milk", "role": "ingredient" },
+    { "id": "e-cream-mixing", "source": "cream-godown", "target": "mixing", "materialCode": "cream", "role": "ingredient" },
+    { "id": "e-sugar-mixing", "source": "sugar-godown", "target": "mixing", "materialCode": "sugar", "role": "ingredient" },
+    { "id": "e-stabilizer-mixing", "source": "stabilizer-godown", "target": "mixing", "materialCode": "stabilizer", "role": "ingredient" },
+    { "id": "e-flavour-flavouring", "source": "flavour-godown", "target": "flavouring", "materialCode": "flavour", "role": "ingredient" },
+
+    { "id": "e-mixing-pasteurization", "source": "mixing", "target": "pasteurization", "materialCode": "ice-cream-mix", "role": "main" },
+    { "id": "e-pasteurization-homogenization", "source": "pasteurization", "target": "homogenization", "materialCode": "pasteurized-mix", "role": "main" },
+    { "id": "e-homogenization-ageing", "source": "homogenization", "target": "ageing", "materialCode": "homogenized-mix", "role": "main" },
+    { "id": "e-ageing-flavouring", "source": "ageing", "target": "flavouring", "materialCode": "aged-mix", "role": "main" },
+    { "id": "e-flavouring-freezing", "source": "flavouring", "target": "freezing", "materialCode": "flavoured-mix", "role": "main" },
+    { "id": "e-freezing-hardening", "source": "freezing", "target": "hardening", "materialCode": "soft-serve-icecream", "role": "main" },
+    { "id": "e-hardening-packaging", "source": "hardening", "target": "packaging", "materialCode": "hardened-icecream", "role": "main" },
+    { "id": "e-packaging-cartoning", "source": "packaging", "target": "cartoning", "materialCode": "packed-tub-500ml", "role": "main" },
+    { "id": "e-cartoning-qclab", "source": "cartoning", "target": "qc-lab", "materialCode": "cartoned-icecream", "role": "main" },
+    { "id": "e-qclab-coldstorage", "source": "qc-lab", "target": "cold-storage", "materialCode": "qc-approved-icecream", "role": "main" },
+
+    { "id": "e-mixing-wastage", "source": "mixing", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-pasteurization-wastage", "source": "pasteurization", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-homogenization-wastage", "source": "homogenization", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-freezing-wastage", "source": "freezing", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-hardening-wastage", "source": "hardening", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-packaging-wastage", "source": "packaging", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-cartoning-wastage", "source": "cartoning", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" },
+    { "id": "e-qclab-wastage", "source": "qc-lab", "target": "wastage-holder", "materialCode": "process-wastage", "role": "wastage" }
+  ]
+}

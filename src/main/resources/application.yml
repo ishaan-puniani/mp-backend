@@ -1,13 +1,62 @@
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+  tomcat:
+    relaxed-query-chars: '[,]'
+
 spring:
+  config:
+    import: optional:classpath:application-local.properties
+  jpa:
+    hibernate:
+      ddl-auto: update
   data:
     mongodb:
-      uri: mongodb+srv://adminuser:iSlWajk7MKxWPq4W@backoffice.zfdff.mongodb.net/?retryWrites=true&w=majority
-      database: test_to_delete
+      uri: ${MONGODB_URI:mongodb+srv://adminuser:iSlWajk7MKxWPq4W@backoffice.zfdff.mongodb.net/?retryWrites=true&w=majority}
+      database: ${MONGODB_DATABASE:test_to_delete}
+      repositories:
+        enabled: true
+      auditing:
+        enabled: true
 
 application:
   security:
     jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000 # a day
+      secret-key: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: ${JWT_EXPIRATION:86400000} # a day
       refresh-token:
-        expiration: 604800000 # 7 days
+        expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
+
+google:
+  cloud:
+    storage:
+      bucket: ${FILE_STORAGE_BUCKET:mp-processes}
+    credentials:
+      json: ${GOOGLE_CLOUD_PLATFORM_CREDENTIALS:}
+
+file:
+  storage:
+    provider: ${FILE_STORAGE_PROVIDER:gcp}
+
+brevo:
+  api:
+    key: ${BREVO_API_KEY:}
+  email:
+    from: ${BREVO_EMAIL_FROM:no-reply@mp.com}
+
+springdoc:
+  api-docs:
+    path: /api/v3/api-docs
+  swagger-ui:
+    path: /api/swagger-ui.html
+    url: ${SWAGGER_UI_API_DOCS_URL:/api/v3/api-docs}
+    operations-sorter: alpha
+    tags-sorter: alpha
+    try-it-out-enabled: true
+    doc-expansion: none
+    filter: true
+    display-request-duration: true
+    default-models-expand-depth: 1
+    default-model-expand-depth: 1
+    show-extensions: false
+    show-common-extensions: false
