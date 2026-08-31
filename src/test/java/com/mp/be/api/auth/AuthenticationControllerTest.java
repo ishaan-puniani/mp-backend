@@ -7,6 +7,7 @@ import com.mp.be.models.auth.AuthenticationRequest;
 import com.mp.be.models.auth.PasswordModel;
 import com.mp.be.models.auth.ProfileDataModel;
 import com.mp.be.models.auth.ResetPasswordModel;
+import com.mp.be.models.auth.SignUpRequest;
 import com.mp.be.models.user.UserModel;
 import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.auth.AuthenticationService;
@@ -97,17 +98,19 @@ public class AuthenticationControllerTest {
 
     @Test
     void testSignUp() {
-        User user = new User();
+        SignUpRequest request = new SignUpRequest();
+        request.setEmail("user@example.com");
+        request.setPassword("password123");
 
         // Test success scenario
         when(authenticationService.registerUser(any(User.class))).thenReturn("jwtToken");
-        ResponseEntity<String> response = authenticationController.signUp(user);
+        ResponseEntity<String> response = authenticationController.signUp(request);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("jwtToken", response.getBody());
 
         // Test failure scenario
         when(authenticationService.registerUser(any(User.class))).thenThrow(new BadCredentialsException("User is already registered"));
-        response = authenticationController.signUp(user);
+        response = authenticationController.signUp(request);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("User is already registered", response.getBody());
     }

@@ -6,6 +6,7 @@ import com.mp.be.models.auth.AuthenticationRequest;
 import com.mp.be.models.auth.PasswordModel;
 import com.mp.be.models.auth.ProfileDataModel;
 import com.mp.be.models.auth.ResetPasswordModel;
+import com.mp.be.models.auth.SignUpRequest;
 import com.mp.be.models.user.UserModel;
 import com.mp.be.models.user.UserMeModel;
 import com.mp.be.services.ServiceOptions;
@@ -56,8 +57,11 @@ public class AuthenticationController {
 
     @Operation(summary = "Register a new platform user")
     @PostMapping("/sign-up")
-    public ResponseEntity<String> signUp(@RequestBody User user) {
+    public ResponseEntity<String> signUp(@RequestBody SignUpRequest request) {
         try {
+            User user = new User();
+            user.setEmail(request.getEmail());
+            user.setPassword(request.getPassword());
             String jwtToken = service.registerUser(user);
             return ResponseEntity.ok(jwtToken);
         } catch (BadCredentialsException e) {
