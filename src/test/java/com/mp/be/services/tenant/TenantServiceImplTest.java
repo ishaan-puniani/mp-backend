@@ -58,7 +58,7 @@ class TenantServiceImplTest {
         Tenant tenant = new Tenant();
         tenant.setName("New Tenant");
 
-        when(tenantRepository.save(any(Tenant.class))).thenReturn(tenant);
+        when(tenantRepository.save(any(Tenant.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // Act
         Tenant createdTenant = tenantService.create(tenant, currentUser);
@@ -66,8 +66,33 @@ class TenantServiceImplTest {
         // Assert
         assertNotNull(createdTenant);
         assertEquals("New Tenant", createdTenant.getName());
+        assertEquals("FREE", createdTenant.getPlan());
+        assertEquals("ACTIVE", createdTenant.getPlanStatus());
+        assertEquals("userId", createdTenant.getPlanUserId());
         verify(tenantRepository, times(1)).save(any(Tenant.class));
         verify(tenantUserRepository, times(1)).create(any(Tenant.class), eq(currentUser), eq(List.of("admin")));
+    }
+
+    @Test
+    void testCreateTenantWithExplicitPlan() {
+        // Arrange
+        User currentUser = new User();
+        currentUser.setId("userId");
+
+        Tenant tenant = new Tenant();
+        tenant.setName("Enterprise Tenant");
+        tenant.setPlan("ENTERPRISE");
+        tenant.setPlanStatus("TRIALING");
+
+        when(tenantRepository.save(any(Tenant.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Act
+        Tenant createdTenant = tenantService.create(tenant, currentUser);
+
+        // Assert
+        assertNotNull(createdTenant);
+        assertEquals("ENTERPRISE", createdTenant.getPlan());
+        assertEquals("TRIALING", createdTenant.getPlanStatus());
     }
 
     @Test
