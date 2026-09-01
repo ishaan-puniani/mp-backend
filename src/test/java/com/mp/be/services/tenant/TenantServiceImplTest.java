@@ -66,8 +66,8 @@ class TenantServiceImplTest {
         // Assert
         assertNotNull(createdTenant);
         assertEquals("New Tenant", createdTenant.getName());
-        assertEquals("FREE", createdTenant.getPlan());
-        assertEquals("ACTIVE", createdTenant.getPlanStatus());
+        assertEquals("free", createdTenant.getPlan());
+        assertEquals("active", createdTenant.getPlanStatus());
         assertEquals("userId", createdTenant.getPlanUserId());
         verify(tenantRepository, times(1)).save(any(Tenant.class));
         verify(tenantUserRepository, times(1)).create(any(Tenant.class), eq(currentUser), eq(List.of("admin")));

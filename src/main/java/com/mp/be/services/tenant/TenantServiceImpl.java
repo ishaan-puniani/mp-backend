@@ -49,10 +49,10 @@ public class TenantServiceImpl implements TenantService {
         data.setUpdatedBy(currentUser.getId());
 
         if (data.getPlan() == null || data.getPlan().trim().isEmpty()) {
-            data.setPlan("FREE");
+            data.setPlan("free");
         }
         if (data.getPlanStatus() == null || data.getPlanStatus().trim().isEmpty()) {
-            data.setPlanStatus("ACTIVE");
+            data.setPlanStatus("active");
         }
         if (data.getPlanUserId() == null && currentUser != null && currentUser.getId() != null) {
             data.setPlanUserId(currentUser.getId());
